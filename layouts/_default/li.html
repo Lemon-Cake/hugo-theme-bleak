@@ -4,10 +4,20 @@
 <article class="{{ .Section }}">
 {{ end }}
 	<div class="inner">
-		<a class="post-link" href="{{ .Permalink }}"></a>
+		{{ if .Params.External }}
+			<a class="post-link" href="{{ .Params.Link }}" target="_blank"></a>
+		{{ else }}
+			<a class="post-link" href="{{ .Permalink }}"></a>
+		{{ end }}
+
+
 		{{ if .Params.image }}
 		<figure class="post-image">
-			<a href="{{ .Permalink }}"><img src="{{ .Params.image }}" alt="" /></a>
+			{{ if .Params.External }}
+				<a href="{{ .Params.Link }}" target="_blank"><img src="{{ .Params.image }}" alt="" /></a>
+			{{ else }}
+				<a href="{{ .Permalink }}"><img src="{{ .Params.image }}" alt="" /></a>
+			{{ end }}
 		</figure>
 		{{ end }}
 		<span class="post-meta">
@@ -16,12 +26,24 @@
 			<span class="post-author"> - {{ .Params.author }}</span>
 			{{ end }}
 		</span>
-		<h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+		<h2 class="post-title">
+			{{ if .Params.External }}
+				<a href="{{ .Params.Link }}" target="_blank">{{ .Title }}</a>
+			{{ else }}
+				<a href="{{ .Permalink }}">{{ .Title }}</a>
+			{{ end }}
+		</h2>
 		{{ if .Description }}
-		<p class="post-excerpt">{{ .Description }}&hellip;</p>
+		<p class="post-excerpt">{{ .Description }}</p>
 		{{ else }}
 		<p class="post-excerpt">{{ .Summary }}&hellip;</p>
 		{{ end }}
-		<span class="post-more"><a href="{{ .Permalink }}">Lire la suite <i class="icon-arrow-right"></i></a></span>
+		<span class="post-more">
+			{{ if .Params.External }}
+				<a href="{{ .Params.Link }}" target="_blank">Lire la suite <i class="icon-arrow-right"></i></a>
+			{{ else }}
+				<a href="{{ .Permalink }}">Lire la suite <i class="icon-arrow-right"></i></a>
+			{{ end }}
+		</span>
 	</div>
 </article>
