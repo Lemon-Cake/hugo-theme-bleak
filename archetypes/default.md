@@ -1,8 +1,8 @@
 +++
-date = "2014-07-11T10:54:24+02:00"
+date = {{ .Date }}
 draft = false
-title = "Post title"
-slug = "post-title"
+title = "{{ replace .Name "-" " " | title }}"
+slug = "{{ .Name }}"
 tags = ["tag1","tag2"]
 image = ""
 comments = true	# set false to hide Disqus
